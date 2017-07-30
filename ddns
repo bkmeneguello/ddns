@@ -1,4 +1,27 @@
 #!/bin/sh
+
+if [ ! -z "$DDNS_DOMAIN_FILE" ]; then
+    export DDNS_DOMAIN=`cat $DDNS_DOMAIN_FILE`
+fi
+if [ ! -z "$DDNS_HOST_FILE" ]; then
+    export DDNS_HOST=`cat $DDNS_HOST_FILE`
+fi
+if [ ! -z "$AWS_ACCESS_KEY_ID_FILE" ]; then
+    export AWS_ACCESS_KEY_ID=`cat $AWS_ACCESS_KEY_ID_FILE`
+fi
+if [ ! -z "$AWS_SECRET_ACCESS_KEY_FILE" ]; then
+    export AWS_SECRET_ACCESS_KEY=`cat $AWS_SECRET_ACCESS_KEY_FILE`
+fi
+if [ ! -z "$DDNS_API_FILE" ]; then
+    export DDNS_API=`cat $DDNS_API_FILE`
+fi
+if [ ! -z "$DDNS_INTERVAL_FILE" ]; then
+    export DDNS_INTERVAL=`cat $DDNS_INTERVAL_FILE`
+fi
+if [ ! -z "$DDNS_TTL_FILE" ]; then
+    export DDNS_TTL=`cat $DDNS_TTL_FILE`
+fi
+
 while true; do
     lastip=$(getent hosts "$DDNS_HOST.$DDNS_DOMAIN" | cut -d' ' -f1)
     ip=$(curl -s ${DDNS_API:-https://api.ipify.org})
