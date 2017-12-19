@@ -27,7 +27,7 @@ while true; do
     ip=$(curl -s ${DDNS_API:-https://api.ipify.org})
     if [ "$lastip" != "$ip" ]; then
         echo "[$(date +%c)] IP changed from $lastip to $ip"
-        /go/bin/cli53 rrcreate --replace --wait $DDNS_DOMAIN "$DDNS_HOST ${DDNS_TTL:-300} A $ip"
+        cli53 rrcreate --replace --wait $DDNS_DOMAIN "$DDNS_HOST ${DDNS_TTL:-300} A $ip"
         echo $ip > lastip
     else
         echo "[$(date +%c)] IP not changed, still $ip"
